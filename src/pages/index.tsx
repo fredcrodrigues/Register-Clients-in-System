@@ -1,6 +1,9 @@
 import Layout from "../components/Layout"  //testabdo
 import Client from "../core/Client"
 import Table from "../components/Table"
+import Button  from "../components/Button"
+import Form from "../components/Form"
+import { useState } from "react"
 
 export default function Home() {
   const clients = [
@@ -14,6 +17,16 @@ export default function Home() {
   function clientSelected(client: Client){
       console.log(client.name)
   }
+
+  function clientTrash(client: Client){
+    console.log('Lixo', client.name)
+  }
+
+
+  function  saveClient(client: Client){
+    console.log(client)
+  }
+  const [visible, setVisible] = useState<'tabela' | 'form'>('tabela')
   return (
     <div className={`
         flex content-center justify-center items-center h-screen 
@@ -22,8 +35,31 @@ export default function Home() {
         `}>
 
         
-      <Layout title="Testando">
-         <Table clientSelect={clientSelected} clients={clients}></Table>
+      <Layout title="Cdastro Simples">
+        {visible === 'tabela' ? (
+          <>
+             <div className="flex justify-end">
+                 <Button onClick={() => setVisible('form')} 
+                          cor="blue" 
+                          className="mb-4"> Novo CLiente
+                 </Button>
+             </div>
+           
+           <Table clientSelect={clientSelected}
+             clientTrash={clientTrash} 
+   
+             clients={clients}></Table>
+          </>
+        ):(
+          <Form 
+                client={clients[0]}
+                clientAlter={saveClient}
+                cancel={() =>  setVisible('tabela')}
+          
+          />
+          )}
+       
+
       </Layout>
       
     
