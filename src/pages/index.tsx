@@ -6,27 +6,40 @@ import Form from "../components/Form"
 import { useState } from "react"
 
 export default function Home() {
+  const [client, setClient] = useState<Client>(Client.empty())
+  const [visible, setVisible] = useState<'table' | 'form'>('table')
+
   const clients = [
     new Client('Test', 12, '1'),
     new Client('Fereds', 12, '2'),
     new Client('Test2', 12, '3'),
     new Client('Test2', 15, '4'),
-    new Client('Test2', 56, '5'),
+    new Client('Test2', 56, '5')
     
   ]
+ 
   function clientSelected(client: Client){
-      console.log(client.name)
+      setClient(client)
+      setVisible('form')
   }
 
-  function clientDel(client: Client){
-    console.log('Lixo', client.name)
+  
+function clientNew(){
+    setClient(Client.empty())
+    setVisible('form')
+}
+
+function clientDel(client: Client){
+    console.log('trash', client.name)
   }
 
 
-  function  saveClient(client: Client){
+function saveClient(client: Client){
+    
     console.log(client)
-  }
-  const [visible, setVisible] = useState<'tabela' | 'form'>('tabela')
+    setVisible('table')
+}
+  
   return (
     <div className={`
         flex content-center justify-center items-center h-screen 
@@ -36,10 +49,10 @@ export default function Home() {
 
         
       <Layout title="Cdastro Simples">
-        {visible === 'tabela' ? (
+        {visible === 'table' ? (
           <>
              <div className="flex justify-end">
-                 <Button onClick={() => setVisible('form')} 
+                 <Button onClick={clientNew} 
                           cor="blue" 
                           className="mb-4"> Novo CLiente
                  </Button>
@@ -47,14 +60,13 @@ export default function Home() {
            
            <Table clientSelect={clientSelected}
              clientDel={clientDel} 
-   
              clients={clients}></Table>
           </>
         ):(
           <Form 
-                client={clients[0]}
+                client={client}
                 clientAlter={saveClient}
-                cancel={() =>  setVisible('tabela')}
+                cancel={() => setVisible('table')}
           
           />
           )}
