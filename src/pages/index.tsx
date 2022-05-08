@@ -18,7 +18,7 @@ export default function Home() {
       console.log(client.name)
   }
 
-  function clientTrash(client: Client){
+  function clientDel(client: Client){
     console.log('Lixo', client.name)
   }
 
@@ -46,7 +46,7 @@ export default function Home() {
              </div>
            
            <Table clientSelect={clientSelected}
-             clientTrash={clientTrash} 
+             clientDel={clientDel} 
    
              clients={clients}></Table>
           </>

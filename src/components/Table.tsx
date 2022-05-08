@@ -46,7 +46,7 @@ export default function Tabela(props){
                         {IconeEdit}
                     </button>
                 ): false}
-                { props.clientDel? (
+                { props.clientDel ? (
                     <button onClick={() => props.clientDel?.(client)} className={`
                     flex justify-center items-center
                     text-red-500 rounded-full p-2 m-1 

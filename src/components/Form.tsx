@@ -28,14 +28,14 @@ export default function Form( props: FormProps){
                 valUpdate={setName}/>
 
             <Input
-              val={name} 
+              val={old} 
              type="number" 
              text="Idade"
              className="mb-5"
              valUpdate={setOld} />
 
             <div className="flex  justify-end mt-3">
-                <Button onClick={() => props.clientAlter} cor="blue" className="mar-2">
+                <Button onClick={() => props.clientAlter?.(new Client(name,old, id))} cor="blue" className="mar-2">
                     {id ?  'Alterar': 'Salvar'}
                 </Button>
                 <Button onClick={props.cancel }>
