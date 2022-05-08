@@ -1,4 +1,4 @@
-import Client from "../core/Client"
+import Client from "../core/Client" //kddk
 import { IconeEdit, IconeTrash } from "./Icons"
 interface TableProps{
     clients: Client[]
