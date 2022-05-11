@@ -1,4 +1,4 @@
-import firebase from "../config";
+import firebase from "../config"; // firebase version 7 >>
 import Client from "../../core/Client";
 import ClientRepository from "../../core/ClientRepository";
 
