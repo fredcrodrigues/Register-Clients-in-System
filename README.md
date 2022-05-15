@@ -1,4 +1,4 @@
-### PROJECT CRUD WITH NEXT JS
+### Project Crud Next Js
 
 This projet is a CRUD basic using REACT,NEXT JS and TYSCRIPT with FIREBASE. Here is possible register clients, delete clients and alter data of a client. 
 
@@ -16,6 +16,13 @@ npm start
 ``` 
  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+
+## Screens
+
+![Screenshot](screen_1.PNG)
+
+
+![Screenshot](screen_2.PNG)
 
 
 
