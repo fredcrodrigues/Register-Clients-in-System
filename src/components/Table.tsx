@@ -7,7 +7,7 @@ interface TableProps{
 
 }
 
-export default function Table(props){
+export default function Table(props: TableProps){
     const showActions = props.clientDel || props.clientSelect
     function renderHead(){
         return(

@@ -9,6 +9,8 @@ interface FormProps{
      cancel?: () => void
 }
 
+
+
 export default function Form( props: FormProps){
     const id = props.client ?.id
     const [name, setName] = useState(props.client?.name ?? '')
@@ -35,13 +37,17 @@ export default function Form( props: FormProps){
              valUpdate={setOld} />
 
             <div className="flex  justify-end mt-3">
-                <Button onClick={() => props.clientAlter?.(new Client(name, old, id))} cor="blue" className="mar-2">
+                    
+                <Button onClick={() => props.clientAlter?.(new Client(name, +old, id))} cor="blue" className="mar-2">
                     {id ?  'Alterar': 'Salvar'}
                 </Button>
                 <Button onClick={props.cancel }>
                     Cancelar
                 </Button>
             </div>
+    
         </div>
     )
+    
+
 }

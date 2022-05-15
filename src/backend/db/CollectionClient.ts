@@ -8,19 +8,20 @@ export default class CollectionClient implements ClientRepository{
     #convert = {
         toFirestore(client: Client){
             return {
-                nome: client.name,
-                old: client.name
+                name: client.name,
+                old: client.old,
             }
         },
-        fromFirestore(snapshot:firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions):Client{
-            const data = snapshot?.data(options)
-            return new Client(data.name, data.old, snapshot.id)
+        fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): Client{
+            const dates = snapshot.data(options)
+            return new Client( dates.name,  dates.old, snapshot.id)
 
         }
     }
     async save(client: Client): Promise<Client> {
        if(client?.id){
-           this.colecttions().doc(client.id).set(client)
+            await this.colecttions().doc(client.id).set(client)
+            return client
        }else{
           const docRef = await this.colecttions().add(client)
           const doc = await docRef.get()
@@ -33,14 +34,14 @@ export default class CollectionClient implements ClientRepository{
     async del(client: Client): Promise<void> {
         return this.colecttions().doc(client.id).delete()
     }
-    async getAll(client: Client): Promise<Client[]> {
+    async getAll(): Promise<Client[]> {
         const query = await this.colecttions().get()
         return query.docs.map(doc  => doc.data()) ?? []
     }
 
     private colecttions(){
          return firebase
-                .firestore().collection('client')
-                .withConverter(this.#convert)
+         .firestore().collection('client')
+         .withConverter(this.#convert)
     }
 }
